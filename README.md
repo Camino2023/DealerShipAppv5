@@ -18,7 +18,6 @@ Tech Stack
 3. Database: MySQL (mysql2)
 4. Middleware: express-session, connect-flash, multer
 
-
 Project Structure
 
 ├── app.js                   # Main application file
