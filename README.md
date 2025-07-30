@@ -1,3 +1,4 @@
+PUT IN IN CODE PREVIEW FOR BETTER UNDERSTANDING
 Vehicle Dealership App
 A web application that manages vehicle listings with a complete authentication system for users, staff, and admins. Supports CRUD operations on vehicles with image uploads, role-based access control, and search functionality.
 
