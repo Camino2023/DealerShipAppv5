@@ -6,6 +6,9 @@ const flash = require('connect-flash');
 const multer = require('multer');
 const app = express();
 
+const gitExtension = vscode.extensions.getExtension<GitExtension>('vscode.git').exports;
+const git = gitExtension.getAPI(1);
+
 // vicknesh's part to import the dealership routes
 const dealershipRoutes = require('./routes/dealership');
 
@@ -22,11 +25,19 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 
+//const connection = mysql.createConnection({
+//    host: 'localhost',
+//   user: 'root',
+//   password: '3ff74d2b5bcb76948d37561a4a2524581ee09c6b',
+//   database: 'ca2_dealeshipapp'
+//});
+
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'RP738964$',
-    database: 'ca2_dealeshipapp'
+    port:61002,
+    host: 'ffjb66.h.filess.io',
+    user: 'DealerShip_areacorngo',
+    password: '3ff74d2b5bcb76948d37561a4a2524581ee09c6b',
+    database: 'DealerShip_areacorngo'
 });
 
 connection.connect((err) => {
