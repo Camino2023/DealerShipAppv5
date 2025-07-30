@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-4">
+<%- include('navbar') %>
+    
+<style>
+body.container.mt-4 {
+    padding-top: 50px !important;
+    padding-bottom: 100px !important;
+}
+</style>
+    <div class="container mt-4">
+        <div class="d-flex align-items-center mb-4">
+            <img src="https://ui-avatars.com/api/?name=<%= encodeURIComponent(customer.username || customer['first name']) %>&background=random&size=64" alt="Profile" class="rounded-circle me-3" style="height:64px;width:64px;object-fit:cover;">
+            <div>
+                <h2 class="mb-0"><%= customer.username || customer['first name'] %></h2>
+                <div class="text-muted">Email: <%= customer.email %> | Role: <%= customer.role %></div>
+            </div>
+        </div>
+
+        <% if (errors.length > 0) { %>
+            <div class="alert alert-danger"><%= errors %></div>
+        <% } %>
+
+        <% if (messages.length > 0) { %>
+            <div class="alert alert-success"><%= messages %></div>
+        <% } %>
+
+        <form action="/update/<%= customer.id %>" method="POST">
+            <div class="mb-3">
+                <label>First Name</label>
+                <input type="text" class="form-control" name="firstName" value="<%= customer['first name'] %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Last Name</label>
+                <input type="text" class="form-control" name="lastName" value="<%= customer['last name'] %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Username</label>
+                <input type="text" class="form-control" name="username" value="<%= customer.username %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Email</label>
+                <input type="email" class="form-control" name="email" value="<%= customer.email %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Password</label>
+                <input type="text" class="form-control" name="password" value="<%= customer.password %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Date of Birth</label>
+                <input type="date" class="form-control" name="dob" value="<%= customer.dob.toISOString().split('T')[0] %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Contact</label>
+                <input type="text" class="form-control" name="contact" value="<%= customer.contact %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label>License</label>
+                <input type="text" class="form-control" name="license" value="<%= customer.license %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Staff ID (optional)</label>
+                <input type="text" class="form-control" name="staffid" value="<%= customer.staffid || '' %>">
+            </div>
+
+            <div class="mb-3">
+                <label>Role</label>
+                <select class="form-select" name="role" required>
+                    <option value="user" <% if (customer.role === 'user') { %>selected<% } %>>User</option>
+                    <option value="staff" <% if (customer.role === 'staff') { %>selected<% } %>>Staff</option>
+                    <option value="admin" <% if (customer.role === 'admin') { %>selected<% } %>>Admin</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="/" class="btn btn-secondary ms-2">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!-- editvehicle.ejs: Edit vehicle info page -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Vehicle</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="container mt-4">
+<%- include('navbar') %>
+    
+<style>
+  body.container.mt-4 {
+    padding-top: 50px !important;
+    padding-bottom: 100px !important;
+  }
+</style>
+  <h1 class="mt-4">Edit Vehicle Information</h1>
+  <% if (errors && errors.length > 0) { %>
+    <div class="alert alert-danger">
+      <% errors.forEach(function(error) { %>
+        <div><%= error %></div>
+      <% }); %>
+    </div>
+  <% } %>
+  <% if (messages && messages.length > 0) { %>
+    <div class="alert alert-success">
+      <% messages.forEach(function(msg) { %>
+        <div><%= msg %></div>
+      <% }); %>
+    </div>
+  <% } %>
+  <form action="/editvehicle/<%= vehicle.id %>" method="POST" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label for="vehicle_name" class="form-label">Vehicle Name</label>
+      <input type="text" class="form-control" id="vehicle_name" name="vehicle_name" value="<%= vehicle.vehicle_name %>" required>
+    </div>
+    <div class="mb-3">
+      <label for="pricetag" class="form-label">Price</label>
+      <input type="number" class="form-control" id="pricetag" name="pricetag" value="<%= vehicle.pricetag %>" required>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea class="form-control" id="description" name="description" required><%= vehicle.description %></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="owner" class="form-label">Owner</label>
+      <input type="text" class="form-control" id="owner" name="owner" value="<%= vehicle.owner %>" required>
+    </div>
+    <div class="mb-3">
+      <label for="date_of_publish" class="form-label">Date of Publish</label>
+      <input type="date" class="form-control" id="date_of_publish" name="date_of_publish" value="<%= vehicle.date_of_publish ? vehicle.date_of_publish.toISOString().slice(0,10) : '' %>" required>
+    </div>
+    <div class="mb-3">
+      <label for="image" class="form-label">Image</label>
+      <input type="file" class="form-control" id="image" name="image">
+      <% if (vehicle.image) { %>
+        <div class="mt-2">
+          <img src="/images/<%= vehicle.image %>" alt="Current Image" style="max-height:100px;">
+        </div>
+      <% } %>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Vehicle</button>
+  </form>
+</body>
+</html>

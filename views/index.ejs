@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>DealershipApp Home</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+      new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+  });
+</script>
+
+<body class="container mt-4">
+  <%- include('navbar') %>
+    <style>
+      body.container.mt-4 {
+        padding-top: 100px !important;
+        padding-bottom: 100px !important;
+      }
+    </style>
+    <h1>Welcome to DealershipApp</h1>
+    <p class="lead">Choose an action below:</p>
+    <div class="d-flex flex-column gap-3">
+      <a href="/dealership/create" class="btn btn-success">Add Vehicle</a>
+      <a href="/carList" class="btn btn-danger">View Car List</a>
+    </div>
+
+    <div class="container mt-5">
+      <h1 class="text-center mb-4">Vehicles for Sale</h1>
+
+      <!-- Search bar -->
+      <form class="mb-4" method="GET" action="/carList">
+        <div class="input-group">
+          <input type="text" class="form-control" name="q" placeholder="Search by brand or model"
+            value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </form>
+
+      <% if (typeof cars==='undefined' || cars.length===0) { %>
+        <p class="text-center">No vehicles available.</p>
+        <% } else { %>
+          <div class="row row-cols-1 row-cols-md-3 g-4">
+            <% cars.forEach(car=> { %>
+              <div class="col">
+                <div class="card h-100 shadow-sm">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                      <h5 class="card-title mb-0">
+                        <%= car.vehicle_name %>
+                      </h5>
+                      <span class="badge bg-info text-dark">ID: <%= car.id %></span>
+                    </div>
+                    <% if (car.image) { %>
+                      <div class="text-center mb-2">
+                        <img src="/images/<%= car.image %>" alt="<%= car.vehicle_name %>"
+                          class="img-fluid rounded shadow-sm"
+                          style="max-height:150px; max-width:100%; object-fit:cover;">
+                      </div>
+                      <% } %>
+                        <a href="/vehicle/<%= car.id %>" class="btn btn-primary btn-sm mb-3">View Details</a>
+                        <ul class="list-group list-group-flush mb-2">
+                          <li class="list-group-item"><span class="badge bg-success">Price</span> $<%= car.pricetag ?
+                              car.pricetag.toLocaleString() : 'N/A' %>
+                          </li>
+                          <li class="list-group-item"><span class="badge bg-secondary">Owner</span>
+                            <%= car.owner %>
+                          </li>
+                          <li class="list-group-item"><span class="badge bg-warning text-dark">Published</span>
+                            <%= car.date_of_publish ? car.date_of_publish.toISOString().slice(0, 10) : 'N/A' %>
+                          </li>
+                        </ul>
+                        <div class="mb-2">
+                          <strong>Description:</strong>
+                          <div class="border rounded p-2 bg-light">
+                            <%= car.description %>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+              </div>
+              <% }) %>
+          </div>
+          <% } %>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
