@@ -6,8 +6,8 @@ const flash = require('connect-flash');
 const multer = require('multer');
 const app = express();
 
-const gitExtension = vscode.extensions.getExtension<GitExtension>('vscode.git').exports;
-const git = gitExtension.getAPI(1);
+//const gitExtension = vscode.extensions.getExtension<GitExtension>('vscode.git').exports;
+//const git = gitExtension.getAPI(1);
 
 // vicknesh's part to import the dealership routes
 const dealershipRoutes = require('./routes/dealership');
