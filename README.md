@@ -48,3 +48,7 @@ const connection = mysql.createConnection({
     password: '3ff74d2b5bcb76948d37561a4a2524581ee09c6b',
     database: 'DealerShip_areacorngo'
 });
+
+
+31/7/2025
+Did manual Update of code
