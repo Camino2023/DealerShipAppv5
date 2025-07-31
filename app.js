@@ -24,21 +24,22 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-
-//const connection = mysql.createConnection({
-//    host: 'localhost',
-//   user: 'root',
-//   password: '3ff74d2b5bcb76948d37561a4a2524581ee09c6b',
-//   database: 'ca2_dealeshipapp'
-//});
-
+// this my SQL connection
 const connection = mysql.createConnection({
-    port:61002,
-    host: 'ffjb66.h.filess.io',
-    user: 'DealerShip_areacorngo',
-    password: '3ff74d2b5bcb76948d37561a4a2524581ee09c6b',
-    database: 'DealerShip_areacorngo'
-});
+   host: 'localhost',
+ user: 'root',
+ password: 'RP738964$',
+ database: 'ca2_dealeshipapp'
+ });
+
+// Uncomment the following lines to connect to a remote MySQL database
+//const connection = mysql.createConnection({
+//  port:61002,
+//    host: 'ffjb66.h.filess.io',
+//  user: 'DealerShip_areacorngo',
+//  password: '3ff74d2b5bcb76948d37561a4a2524581ee09c6b',
+//  database: 'DealerShip_areacorngo'
+//});
 
 connection.connect((err) => {
     if (err) {
@@ -405,7 +406,7 @@ app.post('/update/:id', (req, res) => {
     }
 
     const sql = `
-        UPDATE \`customer info\`
+        UPDATE \`customer_info\`
         SET \`first name\` = ?, \`last name\` = ?, username = ?, email = ?, password = ?, dob = ?, contact = ?, license = ?
         WHERE id = ?
     `;
@@ -484,4 +485,4 @@ app.post('/dealership/create', upload.single('image'), (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port http://localhost:${PORT}/`));
+app.listen(PORT, () => console.log(`Server running on port http://localhost:${3000}/`));
